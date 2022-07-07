@@ -7,15 +7,6 @@ services:
       limits:
         cpu: 2
         memory: 8
-    - name: mysqldb
-      image: mysql:8
-      env:
-      - name: MYSQL_ROOT_PASSWORD
-        value: password
-      volumeMounts: []
-      limits:
-        cpu: 2
-        memory: 8
     - name: pgadmin
       image: dpage/pgadmin4
       env:
