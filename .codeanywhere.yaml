@@ -1,0 +1,44 @@
+services:
+    - name: runtime
+      build:
+        context: .
+      env: []
+      volumeMounts: []
+      limits:
+        cpu: 2
+        memory: 8
+    - name: mysqldb
+      image: mysql:8
+      env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: password
+      volumeMounts: []
+      limits:
+        cpu: 2
+        memory: 8
+    - name: pgadmin
+      image: dpage/pgadmin4
+      env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: admin@email.com
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: pass
+        - name: PGADMIN_LISTEN_PORT
+          value: "5400"
+        - name: PGADMIN_LISTEN_ADDRESS
+          value: "0.0.0.0"
+      volumeMounts: []
+      limits:
+        cpu: 2
+        memory: 8
+    - name: db
+      image: postgres
+      env:
+        - name: POSTGRES_PASSWORD
+          value: pass
+      volumeMounts: []
+      limits:
+        cpu: 2
+        memory: 8
+volumes: []
+tasks: []
