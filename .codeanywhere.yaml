@@ -2,6 +2,7 @@ services:
     - name: runtime
       build:
         context: .
+        dockerfile: Dockerfile.ca
       env: []
       volumeMounts: []
       limits:
