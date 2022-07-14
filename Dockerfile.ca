@@ -1,0 +1,54 @@
+FROM buildpack-deps:focal
+
+### base ###
+RUN apt update && apt install -y \
+        zip \
+        unzip \
+        bash-completion \
+        build-essential \
+        ninja-build \
+        htop \
+        jq \
+        less \
+        locales \
+        man-db \
+        nano \
+        ripgrep \
+        software-properties-common \
+        sudo \
+        time \
+        emacs-nox \
+        vim \
+        multitail \
+        lsof \
+        ssl-cert \
+        fish \
+        zsh \
+    && locale-gen en_US.UTF-8
+
+ENV LANG=en_US.UTF-8
+
+### Git ###
+RUN add-apt-repository -y ppa:git-core/ppa \
+    && apt install -y git git-lfs
+
+### codeany user ###
+RUN groupadd -r -g 9999 codeany && \
+    useradd -r -u 9999 -g 9999 -m -s /bin/bash codeany && \
+    adduser codeany sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN sudo echo "Hiding sudo info on the first login"
+ENV HOME=/home/codeany
+WORKDIR $HOME
+
+# configure git-lfs
+RUN sudo git lfs install --system
+
+# c stuff
+RUN apt install -y \
+    clang \
+    clangd \
+    clang-format \
+    clang-tidy \
+    gdb \
+    lld
