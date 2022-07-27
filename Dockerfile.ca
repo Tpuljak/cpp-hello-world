@@ -32,15 +32,6 @@ ENV LANG=en_US.UTF-8
 RUN add-apt-repository -y ppa:git-core/ppa \
     && apt install -y git git-lfs
 
-### codeany user ###
-RUN groupadd -r -g 9999 codeany && \
-    useradd -r -u 9999 -g 9999 -m -s /bin/bash codeany && \
-    adduser codeany sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-RUN sudo echo "Hiding sudo info on the first login"
-ENV HOME=/home/codeany
-WORKDIR $HOME
-
 # configure git-lfs
 RUN sudo git lfs install --system
 
