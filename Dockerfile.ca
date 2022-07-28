@@ -17,6 +17,7 @@ RUN apt update && apt install -y \
         software-properties-common \
         sudo \
         time \
+        vim \
         emacs-nox \
         multitail \
         lsof \
