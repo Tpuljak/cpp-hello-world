@@ -1,8 +1,6 @@
 services:
     - name: runtime
-      build:
-        context: .
-        dockerfile: Dockerfile.ca
+      image: node:16
       env: []
       volumeMounts: []
       limits:
